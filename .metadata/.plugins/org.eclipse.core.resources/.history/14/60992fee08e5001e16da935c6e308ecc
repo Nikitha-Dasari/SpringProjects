@@ -1,0 +1,24 @@
+package com.sathya.springEx;
+
+import java.util.List;
+
+public interface EmployeeDAO {
+	
+	public int createTable();
+	
+	public Employee getEmployee(int id);
+	
+	public int save(Employee emp);
+	
+	public void saveAll(List<Employee> emp);
+	
+	public List<Employee> findAll();
+	
+	public int deleteById(int id);
+	
+	public int updateBySalary(float curSalary,float newSalary);
+	
+	public int dropTable();
+	
+	
+ }

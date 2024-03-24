@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
+module LombokExample {
+	requires jdk.jshell;
+}

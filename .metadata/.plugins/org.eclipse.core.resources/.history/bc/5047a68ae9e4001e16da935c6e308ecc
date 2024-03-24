@@ -1,0 +1,55 @@
+package com.sathya.springEx;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class EmployeeDAOImpl implements EmployeeDAO {
+
+		@Autowired
+		private JdbcTemplate jdbcTemplate;
+		
+		@Autowired
+		private RowMapper rowMapper;
+		
+		@Override
+		public int save(Employee emp) {
+			String sql="insert into emp_data values(?,?,?)";
+			int emps=jdbcTemplate.update(sql,emp.getId(),emp.getName(),emp.getSalary());
+			return emps;
+		}
+		
+		@Override
+		public Employee getEmployee(int id) {
+			String sql = "select * from emp_data where id = ?";
+		    Employee emps= jdbcTemplate.queryForObject(sql,new Object[]{id},new EmployeeRowMapper());
+		    return emps;
+		}
+
+		@Override
+		public List<Employee> findAll() {
+			// TODO Auto-generated method stub
+			String sql="select * from emp_data";
+			List<Employee> emp=jdbcTemplate.query(sql,new EmployeeRowMapper());
+			return emp;
+		}
+
+		@Override
+		public int deleteById(int id) {
+			String sql="delete from emp_data where id=?";
+			int emps=jdbcTemplate.update(sql,id);
+			return emps;
+		}
+
+		@Override
+		public int updateBySalary(float curSalary, float newSalary) {
+			String sql="update emp_data set salary=salary+? where salary>?";
+			int emps=jdbcTemplate.update(sql,newSalary,curSalary);
+			return emps;
+		}
+		
+}

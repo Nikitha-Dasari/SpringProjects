@@ -1,0 +1,6 @@
+package com.sathya.springBootLombokEx;
+
+public class Employee {
+	
+
+}
